@@ -6,7 +6,7 @@
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:37:35 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/08 19:34:16 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:56:52 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	err_display(int err)
 	if (err == 1)
 		perror("error, correct usage: ./pipex file1 cmd1 cmd2 file2\n");
 	else if (err == 2)
-		perror("error, something went wrong");
+		perror("dup2 failed");
 	else if (err == 3)
 		perror("input file error");
 	else if (err == 4)
@@ -45,16 +45,17 @@ static void	ft_exec(char *cmd, char *envp[])
 	{
 		path_buf = ft_join(paths[n], '/', cmnds[0]);
 		if (access(path_buf, F_OK) == 0)
-		{
-			if (execve(path_buf, cmnds, NULL) == -1)
-				err_display(2);
-		}
+			if (execve(path_buf, cmnds, envp) == -1)
+			{
+				err_display(6);
+			
+			}
 		free(path_buf);
 		n++;
 	}
 	clear(cmnds);
 	clear(paths);
-	err_display(2);
+	err_display(6);
 }
 
 static void	exec_snd_cmnd(int *fd, char *argv[], char *envp[])
