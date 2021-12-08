@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_3.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:16:03 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/05 17:16:13 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:32:05 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	err_display(int err)
+size_t	ft_strlen(const char *s)
 {
-	if (err == 1)
-		ft_printf("Error, correct usage: ./pipex file1 cmd1 cmd2 file2\n");
-	else if (err == 2)
-		ft_printf("Error, something went wrong");
-	else if (err == 3)
-		ft_printf("Input file error");
-	else if (err == 4)
-		ft_printf("Output file error");
-	else if (err == 5)
-		ft_printf("Path error");
-	exit(EXIT_FAILURE);
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
 void	clear(char **to_free)

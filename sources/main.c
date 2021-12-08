@@ -6,11 +6,28 @@
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:37:35 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/05 15:40:23 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:34:16 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+void	err_display(int err)
+{
+	if (err == 1)
+		perror("error, correct usage: ./pipex file1 cmd1 cmd2 file2\n");
+	else if (err == 2)
+		perror("error, something went wrong");
+	else if (err == 3)
+		perror("input file error");
+	else if (err == 4)
+		perror("output file error");
+	else if (err == 5)
+		perror("path error");
+	else if (err == 6)
+		perror("command not found");
+	exit(EXIT_FAILURE);
+}
 
 static void	ft_exec(char *cmd, char *envp[])
 {
@@ -55,7 +72,7 @@ static void	exec_snd_cmnd(int *fd, char *argv[], char *envp[])
 	close(out_fl);
 	close(fd[0]);
 	if (!*argv[3])
-		argv[3] = "cat";
+		err_display(6);
 	ft_exec(argv[3], envp);
 }
 
@@ -74,7 +91,7 @@ static void	exec_fst_cmnd(int *fd, char *argv[], char *envp[])
 	close(in_fl);
 	close(fd[1]);
 	if (!*argv[2])
-		argv[2] = "cat";
+		err_display(6);
 	ft_exec(argv[2], envp);
 }
 
