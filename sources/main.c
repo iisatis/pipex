@@ -6,7 +6,7 @@
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:37:35 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/08 19:56:52 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:56:42 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ static void	ft_exec(char *cmd, char *envp[])
 		path_buf = ft_join(paths[n], '/', cmnds[0]);
 		if (access(path_buf, F_OK) == 0)
 			if (execve(path_buf, cmnds, envp) == -1)
-			{
 				err_display(6);
-			
-			}
 		free(path_buf);
 		n++;
 	}

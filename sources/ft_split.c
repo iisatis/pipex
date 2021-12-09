@@ -6,7 +6,7 @@
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 17:19:19 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/05 14:48:33 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:57:18 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,43 +84,15 @@ static char	**full_filler(size_t count, char **dest, char const *s, char c)
 	return (dest);
 }
 
-char	**ft_split(char const *s, char c) ///////////////to change/////////////////
+char	**ft_split(char const *s, char c)
 {
 	size_t	count;
-	//size_t	n;
 	char	**dest;
 
 	count = words_count(s, c);
-	//n = 0;
 	dest = malloc(sizeof(char *) * (count + 1));
 	if (!dest)
 		return (NULL);
-
 	dest = full_filler(count, dest, s, c);
-	
-	/*
-	if (!dest)
-	{
-		free(dest);
-		return (NULL);
-	}
-	
-	while (count)
-	{
-		while (*s && *s == (const char)c)
-			s++;
-		dest[n] = filler(s, word_len(s, c));
-		if (!dest[n])
-		{
-			clear(dest);
-			return (NULL);
-		}
-		while (*s && *s != (const char)c)
-			s++;
-		count--;
-		n++;
-	}
-	dest[n] = 0;
-	*/
 	return (dest);
 }
