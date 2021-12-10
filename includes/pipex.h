@@ -6,7 +6,7 @@
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:45:13 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/09 18:32:55 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:59:13 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 # define PIPEX_H
 
 # include <stdlib.h>
-# include <stdarg.h>
 # include <stddef.h>
 # include <unistd.h>
-# include <string.h>
 # include <sys/wait.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <errno.h> 
+# include <errno.h>
 
 void		err_display(int err);
 void		clear(char **to_free);
