@@ -6,7 +6,7 @@
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:45:13 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/10 17:59:13 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:18:39 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <errno.h>
 
 void		err_display(int err);
 void		clear(char **to_free);

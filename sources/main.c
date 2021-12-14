@@ -6,7 +6,7 @@
 /*   By: pflorent <pflorent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:37:35 by pflorent          #+#    #+#             */
-/*   Updated: 2021/12/10 16:11:41 by pflorent         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:18:39 by pflorent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	err_display(int err)
 	if (err == 1)
 		perror("error, correct usage: ./pipex file1 cmd1 cmd2 file2\n");
 	else if (err == 2)
-		perror("dup2 failed");
+		perror("pipe failed");
 	else if (err == 3)
 		perror("input file error");
 	else if (err == 4)
@@ -26,6 +26,10 @@ void	err_display(int err)
 		perror("path error");
 	else if (err == 6)
 		perror("command not found");
+	else if (err == 7)
+		perror("dup2 failed");
+	else if (err == 8)
+		perror("fork failed");
 	exit(EXIT_FAILURE);
 }
 
@@ -66,9 +70,9 @@ static void	exec_snd_cmnd(int *fd, char *argv[], char *envp[])
 	if (out_fl < 0)
 		err_display(4);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
-		err_display(2);
+		err_display(7);
 	if (dup2(out_fl, STDOUT_FILENO) == -1)
-		err_display(2);
+		err_display(7);
 	close(fd[1]);
 	close(out_fl);
 	close(fd[0]);
@@ -85,9 +89,9 @@ static void	exec_fst_cmnd(int *fd, char *argv[], char *envp[])
 	if (in_fl < 0)
 		err_display(3);
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
-		err_display(2);
+		err_display(7);
 	if (dup2(in_fl, STDIN_FILENO) == -1)
-		err_display(2);
+		err_display(7);
 	close(fd[0]);
 	close(in_fl);
 	close(fd[1]);
@@ -108,12 +112,12 @@ int	main(int argc, char *argv[], char*envp[])
 		err_display(2);
 	pid1 = fork();
 	if (pid1 == -1)
-		err_display(2);
+		err_display(8);
 	if (pid1 == 0)
 		exec_fst_cmnd(fd, argv, envp);
 	pid2 = fork();
 	if (pid2 == -1)
-		err_display(2);
+		err_display(8);
 	if (pid2 == 0)
 		exec_snd_cmnd(fd, argv, envp);
 	close(fd[0]);
